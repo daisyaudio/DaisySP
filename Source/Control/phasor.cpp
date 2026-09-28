@@ -21,7 +21,7 @@ float Phasor::Process()
     }
     if(phs_ < 0.0f)
     {
-        phs_ = 0.0f;
+        phs_ += TWOPI_F;
     }
     return out;
 }
