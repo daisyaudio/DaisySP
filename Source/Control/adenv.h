@@ -62,7 +62,11 @@ class AdEnv
 
     /** Starts or retriggers the envelope.*/
     inline void Trigger() { trigger_ = 1; }
-    /** Sets the length of time (in seconds) for a specific segment. */
+    /** Sets the length of time (in seconds) for a specific segment.
+        
+        Segments are defined by the AdEnvSegment enumeration.
+        @see AdEnvSegment
+    */
     inline void SetTime(uint8_t seg, float time) { segment_time_[seg] = time; }
     /** Sets the amount of curve applied. A positve value will create a log
         curve. Input range: -100 to 100.  (or more)
@@ -80,6 +84,10 @@ class AdEnv
     inline float GetValue() const { return (output_ * (max_ - min_)) + min_; }
     /** Returns the segment of the envelope that the phase is currently located
         in.
+        
+        Segments are defined by the AdEnvSegment enumeration.
+        @see AdEnvSegment
+        \return the current AdEnvSegment
     */
     inline uint8_t GetCurrentSegment() { return current_segment_; }
     /** Returns true if the envelope is currently in any stage apart from idle.
