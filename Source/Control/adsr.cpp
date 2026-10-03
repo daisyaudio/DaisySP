@@ -60,7 +60,7 @@ void Adsr::SetAttackTime(float timeInS, float shape)
             float target    = 9.f * powf(x, 10.f) + 0.3f * x + 1.01f;
             attackTarget_   = target;
             float logTarget = logf(1.f - (1.f / target)); // -1 for decay
-            attackD0_       = 1.f - expf(logTarget / (timeInS * sample_rate_));
+            attackD0_       = -expm1f(logTarget / (timeInS * sample_rate_));
         }
         else
             attackD0_ = 1.f; // instant change
@@ -84,7 +84,7 @@ void Adsr::SetTimeConstant(float timeInS, float& time, float& coeff)
         if(time > 0.f)
         {
             const float target = logf(1. / M_E);
-            coeff              = 1.f - expf(target / (time * sample_rate_));
+            coeff              = -expm1f(target / (time * sample_rate_));
         }
         else
             coeff = 1.f; // instant change
