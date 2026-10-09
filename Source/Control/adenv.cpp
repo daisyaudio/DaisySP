@@ -75,7 +75,7 @@ float AdEnv::Process()
         current_segment_ = ADENV_SEG_ATTACK;
         phase_           = 0;
         curve_x_         = 0.0f;
-        retrig_val_      = output_;
+        retrig_val_      = hard_trigger_ ? 0.0 : output_;
     }
 
     time_samps = (uint32_t)(segment_time_[current_segment_] * sample_rate_);
