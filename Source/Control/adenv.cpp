@@ -52,6 +52,8 @@ void AdEnv::Init(float sample_rate)
 {
     sample_rate_     = sample_rate;
     current_segment_ = ADENV_SEG_IDLE;
+    prev_segment_    = ADENV_SEG_IDLE;
+    trigger_         = 0;
     curve_scalar_    = 0.0f; // full linear
     phase_           = 0;
     min_             = 0.0f;
