@@ -56,6 +56,7 @@ class Oscillator
         pw_        = 0.5f;
         phase_     = 0.0f;
         phase_inc_ = CalcPhaseInc(freq_);
+        last_out_  = 0.0f;
         waveform_  = WAVE_SIN;
         eoc_       = true;
         eor_       = true;
