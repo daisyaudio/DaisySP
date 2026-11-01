@@ -269,14 +269,14 @@ inline void TestFloat(float &x, float y = 0.f)
 
 /** Based on soft saturate from:
 [musicdsp.org](musicdsp.org/en/latest/Effects/42-soft-saturation.html)
+with 0 <= thresh <= 1
 Bram de Jong (2002-01-17)
-This still needs to be tested/fixed. Definitely does some weird stuff
 described as:
-x < a:
+x <= a:
      f(x) = x
 x > a:
      f(x) = a + (x-a)/(1+((x-a)/(1-a))^2)
-x > 1:
+x >= 1:
      f(x) = (a + 1)/2
 */
 inline float soft_saturate(float in, float thresh)
@@ -287,11 +287,11 @@ inline float soft_saturate(float in, float thresh)
     out  = 0.f;
     flip = in < 0.0f;
     val  = flip ? -in : in;
-    if(val < thresh)
+    if(val <= thresh)
     {
         out = in;
     }
-    else if(val > 1.0f)
+    else if(val >= 1.0f)
     {
         out = (thresh + 1.0f) / 2.0f;
         if(flip)
@@ -306,16 +306,8 @@ inline float soft_saturate(float in, float thresh)
             out *= -1.0f;
     }
     return out;
-    //    return val < thresh
-    //               ? val
-    //               : val > 1.0f
-    //                     ? (thresh + 1.0f) / 2.0f
-    //                     : thresh
-    //                           + (val - thresh)
-    //                                 / (1.0f
-    //                                    + (((val - thresh) / (1.0f - thresh))
-    //                                       * ((val - thresh) / (1.0f - thresh))));
 }
+
 constexpr bool is_power2(uint32_t x)
 {
     return ((x - 1) & x) == 0;
