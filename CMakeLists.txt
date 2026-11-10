@@ -46,12 +46,15 @@ Source/Utility/dcblock.cpp
 Source/Utility/metro.cpp
 )
 
+IF (WIN32)
+  target_compile_definitions(DaisySP PUBLIC _USE_MATH_DEFINES)
+ENDIF()
+
 
 set_target_properties(DaisySP PROPERTIES PUBLIC
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED
   )
-
 
 target_include_directories(DaisySP PUBLIC
   ${CMAKE_CURRENT_LIST_DIR}/Source
